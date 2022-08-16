@@ -1,0 +1,441 @@
+{
+    "buildInfo": {
+        "rustc": {
+            "version": "1.64.0-nightly",
+            "commitHash": "fe3342816a282949f014caa05ea2e669ff9d3d3c",
+            "commitDate": "2022-08-01",
+            "channel": "Nightly",
+            "short": "rustc 1.64.0-nightly (fe3342816 2022-08-01)"
+        },
+        "contractCrate": {
+            "name": "handshake",
+            "version": "0.0.0"
+        },
+        "framework": {
+            "name": "elrond-wasm",
+            "version": "0.30.0"
+        }
+    },
+    "name": "Handshake",
+    "constructor": {
+        "inputs": [
+            {
+                "name": "treasury_address",
+                "type": "Address"
+            },
+            {
+                "name": "fee",
+                "type": "u64"
+            },
+            {
+                "name": "expiration_period",
+                "type": "u64"
+            }
+        ],
+        "outputs": []
+    },
+    "endpoints": [
+        {
+            "name": "viewHandshakeSetting",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "HandshakeSetting"
+                }
+            ]
+        },
+        {
+            "name": "viewOrder",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "order_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "Order"
+                }
+            ]
+        },
+        {
+            "name": "viewOrders",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "variadic<Order>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
+            "name": "createOrder",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [
+                {
+                    "name": "offered_token",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "offered_amount",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "offered_token_decimals",
+                    "type": "u32"
+                },
+                {
+                    "name": "wanted_token",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "wanted_amount",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "wanted_token_decimals",
+                    "type": "u32"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "cancelOrder",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "order_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "acceptOrder",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [
+                {
+                    "name": "order_id",
+                    "type": "u32"
+                },
+                {
+                    "name": "percentage",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "removeOldOrders",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "getTreasuryAddress",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "Address"
+                }
+            ]
+        },
+        {
+            "name": "setTreasuryAddress",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "treasury_address",
+                    "type": "Address"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "getFee",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "setFee",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "fee",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "getExpirationPeriod",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "setExpirationPeriod",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "expiration_period",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "getPaused",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "bool"
+                }
+            ]
+        },
+        {
+            "name": "pause",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "unpause",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "getLastOrderId",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "u32"
+                }
+            ]
+        },
+        {
+            "name": "getLiveOrderIds",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "variadic<u32>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
+            "name": "getOrderOwner",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "offer_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "Address"
+                }
+            ]
+        },
+        {
+            "name": "getOfferedToken",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "offer_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "TokenIdentifier"
+                }
+            ]
+        },
+        {
+            "name": "getOfferedAmount",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "offer_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "getOfferedTokenDecimals",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "offer_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "u32"
+                }
+            ]
+        },
+        {
+            "name": "getWantedToken",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "offer_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "TokenIdentifier"
+                }
+            ]
+        },
+        {
+            "name": "getWantedAmount",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "offer_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "getWantedTokenDecimals",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "offer_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "u32"
+                }
+            ]
+        },
+        {
+            "name": "getCreationTimestamp",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "offer_id",
+                    "type": "u32"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        }
+    ],
+    "hasCallback": false,
+    "types": {
+        "HandshakeSetting": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "treasury_address",
+                    "type": "Address"
+                },
+                {
+                    "name": "fee",
+                    "type": "u64"
+                },
+                {
+                    "name": "paused",
+                    "type": "bool"
+                },
+                {
+                    "name": "number_of_orders",
+                    "type": "u32"
+                }
+            ]
+        },
+        "Order": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "order_id",
+                    "type": "u32"
+                },
+                {
+                    "name": "owner",
+                    "type": "Address"
+                },
+                {
+                    "name": "offered_token",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "offered_amount",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "offered_token_decimals",
+                    "type": "u32"
+                },
+                {
+                    "name": "wanted_token",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "wanted_amount",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "wanted_token_decimals",
+                    "type": "u32"
+                },
+                {
+                    "name": "creation_timestamp",
+                    "type": "u64"
+                }
+            ]
+        }
+    }
+}

@@ -1,1 +1,1 @@
-# esdt-p2p
+# handshakes.market official implementation of the esdt-p2p smart contract
